@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
 use Doctrine\ORM\Mapping as ORM;
+use phpDocumentor\Reflection\Types\Collection;
 
 /**
  * @ApiResource()
@@ -31,40 +32,9 @@ class Course
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Author", inversedBy="course")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $author;
-
-    /**
-     * @return Author
-     */
-    public function getAuthor(): Author
-    {
-        return $this->author;
-    }
-
-    /**
-     * @param mixed $author
-     */
-    public function setAuthor(Author $author): void
-    {
-        $this->author = $author;
-    }
-
-    /**
-     * @return Student
-     */
-    public function getStudent(): Student
-    {
-        return $this->student;
-    }
-
-    /**
-     * @param mixed $student
-     */
-    public function setStudent(Student $student): void
-    {
-        $this->student = $student;
-    }
 
     public function __construct()
     {
@@ -87,5 +57,44 @@ class Course
 
         return $this;
     }
+
+    /**
+     * @return Student
+     */
+    public function getStudent(): Student
+    {
+        return $this->student;
+    }
+
+    /**
+     * @param mixed $student
+     * @return Course
+     */
+    public function setStudent(Student $student): self
+    {
+        $this->student = $student;
+
+        return $this;
+    }
+
+    /**
+     * @return Author
+     */
+    public function getAuthor(): Author
+    {
+        return $this->author;
+    }
+
+    /**
+     * @param mixed $author
+     * @return Course
+     */
+    public function setAuthor(Author $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
 
 }
